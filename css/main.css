@@ -1,0 +1,59 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2017-08-16, 20:50:12
+    Author     : Przemysław Kula
+*/
+
+
+body, html {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+
+.top{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../gfx/Warstwa 11.png') center center no-repeat;
+    background-size: cover;
+}
+.top .title{
+    position: absolute;
+    bottom: 16%;
+    left: 20%;
+}
+
+h1{
+    font-size: 40px;
+    color: white;
+    font-size: 70px;
+    color: white;
+
+}
+
+.canvasContainer{
+    position: absolute;
+    bottom: 5%;
+    left: 10%;
+    width: 50%;
+    height: 50%;
+}
+
+canvas{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
