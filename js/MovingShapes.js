@@ -51,25 +51,53 @@ export class MovingShapes {
 
         for (let i = 0; i < this._itemsCount; i++) {
             let item = this._items[i];
-            this._updateItemVector(item);
 
             item.move(this._frameDistance, this._frameDistance);
+            this._limitItemPositionInsideCanvas(item);
             item.draw(this._ctx);
 
         }
     }
 
-    _updateItemVector(item) {
-        let itemLeft = item.getLeft();
-        let itemTop = item.getTop();
-
-        if (itemLeft + item.getWidth() >= this._width || itemLeft <= 0) {
-            item.bounceHorizontal();
+    _limitItemPositionInsideCanvas(item) {
+        if (this._isItemBeyondLeftBorder(item)) {
+            this._fixItemHorizontalPosition(item, 0);
+        }else if (this._isItemBeyondRightBorder(item)) {
+            this._fixItemHorizontalPosition(item, this._width - item.getWidth());
         }
 
-        if (itemTop + item.getHeight() >= this._height || itemTop <= 0) {
-            item.bounceVertical();
+        if (this._isItemBeyondTopBorder(item)) {
+            this._fixItemVerticalPosition(item, 0);
+        } else if (this._isItemBeyondBottomBorder(item)) {
+            this._fixItemVerticalPosition(item, this._height - item.getHeight());
         }
+    }
+
+    _isItemBeyondRightBorder(item) {
+        return item.getLeft() + item.getWidth() >= this._width;
+    }
+
+    _isItemBeyondLeftBorder(item) {
+        return item.getLeft() <= 0;
+    }
+
+    _isItemBeyondBottomBorder(item) {
+        return item.getTop() + item.getHeight() >= this._height;
+    }
+
+    _isItemBeyondTopBorder(item) {
+        return item.getTop() <= 0;
+    }
+
+    _fixItemHorizontalPosition(item, leftOffset) {
+        item.bounceHorizontal();
+        item.setLeft(leftOffset);
+    }
+
+    _fixItemVerticalPosition(item, topOffset) {
+        item.bounceVertical();
+        item.setTop(topOffset);
+
     }
 
     start() {

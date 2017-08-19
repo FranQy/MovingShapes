@@ -20,10 +20,10 @@ export class Circle {
     }
 
     setTop(top) {
-        this._top = top;
+        this._top = top + this._radius;
     }
     setLeft(left) {
-        this._left = left;
+        this._left = left + this._radius;
     }
     setWidth(width) {
         this._width = width;
