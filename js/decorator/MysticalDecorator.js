@@ -52,7 +52,6 @@ export class MysticalDecorator {
             alphaHorizontal = this._calcAlphaByCoordinates(this._visibleAreaHorizontalStart, this._item.getLeft());
         }
 
-
         this._ctx.globalAlpha = this._getSmaller(alphaVertical, alphaHorizontal);
     }
 
@@ -63,6 +62,7 @@ export class MysticalDecorator {
     _getSmaller(number1, number2) {
         return number1 < number2 ? number1 : number2;
     }
+    
     _setVisibleAgain(ctx) {
         this._ctx.globalAlpha = 1;
     }

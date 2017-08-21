@@ -6,13 +6,13 @@
 
 
 export class MovingShapes {
+    
     constructor(canvas, width, height) {
         this._canvas = canvas;
         this._width = this._canvas.width = width;
         this._height = this._canvas.height = height;
         this._ctx = this._canvas.getContext("2d");
         this._items = [];
-
         this._animationSpeed = 1 / 16;
         this._frameDistance = 0;
         this._playing = false;
@@ -22,13 +22,14 @@ export class MovingShapes {
     getHeight() {
         return this._height;
     }
+    
     getWidth() {
         return this._width;
     }
+    
     addItems(items) {
         this._items = this._items.concat(items);
         this._itemsCount = this._items.length;
-
     }
 
     _clear() {
@@ -45,27 +46,24 @@ export class MovingShapes {
     _calcFrameDistance(newTime) {
         this._frameDistance = (newTime - this._time) * this._animationSpeed;
     }
+    
     _limitFrameDistance() {
         this._frameDistance = this._frameDistance > this._frameDistanceLimit ? this._frameDistanceLimit : this._frameDistance;
     }
+    
     _mainLoop() {
-
         this._updateFrameDistance();
-
         this._clear();
         this._reDrawItems();
         this._loop();
     }
 
     _reDrawItems() {
-
         for (let i = 0; i < this._itemsCount; i++) {
             let item = this._items[i];
-
             item.move(this._frameDistance, this._frameDistance);
             this._limitItemPositionInsideCanvas(item);
             item.draw();
-
         }
     }
 

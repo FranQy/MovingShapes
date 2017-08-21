@@ -9,6 +9,7 @@ import {ShapeAbstract} from './ShapeAbstract';
 
 
 export class Square extends ShapeAbstract {
+    
     constructor(canvas, left, top, width, height) {
         super(canvas, left, top);
         this._width = width;
@@ -19,5 +20,4 @@ export class Square extends ShapeAbstract {
         this._ctx.fillStyle = this._color;
         this._ctx.fillRect(this._left, this._top, this._width, this._height);
     }
-
 }
