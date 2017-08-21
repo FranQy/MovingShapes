@@ -9,6 +9,7 @@ import {Star} from './shapes/Star';
 import {Circle} from './shapes/Circle';
 import {Square} from './shapes/Square';
 import {MysticalDecorator} from './decorator/MysticalDecorator';
+import {FadeDecorator} from './decorator/FadeDecorator';
 
 
 let canvas = document.querySelector("canvas");
@@ -16,7 +17,7 @@ var movingShapes = new MovingShapes(canvas, canvas.parentNode.offsetWidth, canva
 let width = movingShapes.getWidth();
 let height = movingShapes.getHeight();
 
-movingShapes.addItems(getItems(Star, 80));
+movingShapes.addItems(getItems(Star, 50));
 movingShapes.start();
 
 
@@ -41,6 +42,7 @@ function getItems(Shape, count) {
         }
 
         item.setColor('rgba(255,255,255,0.5');
+        item.setDecorator(new FadeDecorator(canvas));
         item.setDecorator(new MysticalDecorator(canvas));
         items.push(item);
     }

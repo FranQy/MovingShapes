@@ -16,6 +16,7 @@ export class ShapeAbstract {
         this._yVector = 1;
         this._color = 'red';
         this._decorators = [];
+        this._alpha = 1;
     }
 
     setTop(top) {
@@ -77,6 +78,8 @@ export class ShapeAbstract {
         for (let i = 0; i < this._decorators.length; i++) {
             this._decorators[i].beforeItemDraw();
         }
+
+        this._ctx.globalAlpha = this._alpha;
     }
 
     _draw() {
@@ -87,5 +90,22 @@ export class ShapeAbstract {
         for (let i = 0; i < this._decorators.length; i++) {
             this._decorators[i].afterItemDraw();
         }
+
+        this._ctx.globalAlpha = this._alpha = 1;
+    }
+
+    setIfSmaller(value, propertyName) {
+        propertyName = '_' + propertyName;
+        if (this[propertyName] !== undefined) {
+            this[propertyName] = this._getSmaller(this[propertyName], value);
+        }
+    }
+
+    _getSmaller(number1, number2) {
+        return number1 < number2 ? number1 : number2;
+    }
+
+    getProperty(name) {
+        return this['_' + name];
     }
 }

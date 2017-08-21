@@ -4,14 +4,13 @@
  * and open the template in the editor.
  */
 
+import {DecoratorAbstract} from './DecoratorAbstract';
 
-export class MysticalDecorator {
+export class MysticalDecorator extends DecoratorAbstract {
 
     constructor(canvas) {
-        this._canvas = canvas;
-        this._ctx = this._canvas.getContext("2d");
-        this._width = this._canvas.width;
-        this._height = this._canvas.height;
+        super(canvas);
+        
         this._visibilityMarginRatio = 0.2;
 
         this._visibilityMarginVertical = this._height * this._visibilityMarginRatio / 2;
@@ -23,16 +22,8 @@ export class MysticalDecorator {
         this._visibleAreaHorizontalStop = this._width - this._visibilityMarginHorizontal;
     }
 
-    setItem(item) {
-        this._item = item;
-    }
-
     beforeItemDraw() {
         this._setPositionOpacity();
-    }
-
-    afterItemDraw() {
-        this._setVisibleAgain();
     }
 
     _setPositionOpacity() {
@@ -52,7 +43,9 @@ export class MysticalDecorator {
             alphaHorizontal = this._calcAlphaByCoordinates(this._visibleAreaHorizontalStart, this._item.getLeft());
         }
 
-        this._ctx.globalAlpha = this._getSmaller(alphaVertical, alphaHorizontal);
+        alpha = this._getSmaller(alphaVertical, alphaHorizontal);
+
+        this._item.setIfSmaller(alpha, 'alpha');
     }
 
     _calcAlphaByCoordinates(biggerCoordinate, smallerCoordinate) {
@@ -61,9 +54,5 @@ export class MysticalDecorator {
 
     _getSmaller(number1, number2) {
         return number1 < number2 ? number1 : number2;
-    }
-    
-    _setVisibleAgain(ctx) {
-        this._ctx.globalAlpha = 1;
     }
 }
