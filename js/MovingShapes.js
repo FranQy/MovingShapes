@@ -11,11 +11,12 @@ export class MovingShapes {
         this._width = this._canvas.width = width;
         this._height = this._canvas.height = height;
         this._ctx = this._canvas.getContext("2d");
+        this._items = [];
 
         this._animationSpeed = 1 / 16;
         this._frameDistance = 0;
         this._playing = false;
-        this._frameDistanceLimit=5;
+        this._frameDistanceLimit = 5;
     }
 
     getHeight() {
@@ -24,8 +25,8 @@ export class MovingShapes {
     getWidth() {
         return this._width;
     }
-    setItems(items) {
-        this._items = items || [];
+    addItems(items) {
+        this._items = this._items.concat(items);
         this._itemsCount = this._items.length;
 
     }
@@ -63,7 +64,7 @@ export class MovingShapes {
 
             item.move(this._frameDistance, this._frameDistance);
             this._limitItemPositionInsideCanvas(item);
-            item.draw(this._ctx);
+            item.draw();
 
         }
     }

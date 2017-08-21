@@ -8,12 +8,11 @@ import {Circle} from './Circle';
 
 
 export class Star extends Circle {
-    constructor(top, left, radius) {
-        super(top, left, radius);
-        this._color = 'blue';
-    }
 
-    draw(ctx) {
+    _draw() {
+        let ctx = this._ctx;
+
+
         ctx.beginPath();
         var grd = ctx.createRadialGradient(this._left, this._top, 0, this._left, this._top, this._radius);
         grd.addColorStop(0, this._color);

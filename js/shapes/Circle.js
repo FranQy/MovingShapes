@@ -4,19 +4,15 @@
  * and open the template in the editor.
  */
 
+import {ShapeAbstract} from './ShapeAbstract';
 
+export class Circle extends ShapeAbstract {
+    constructor(canvas, left, top, radius) {
+        super(canvas, left, top);
 
-export class Circle {
-    constructor(top, left, radius) {
-        this._top = top;
-        this._left = left;
         this._width = radius * 2;
         this._height = radius * 2;
         this._radius = radius;
-        this._speed = 1;
-        this._xVector = 1;
-        this._yVector = 1;
-        this._color = 'red';
     }
 
     setTop(top) {
@@ -25,49 +21,19 @@ export class Circle {
     setLeft(left) {
         this._left = left + this._radius;
     }
-    setWidth(width) {
-        this._width = width;
-    }
-    setHeight(height) {
-        this._height = height;
-    }
-    setColor(color) {
-        this._color = color;
-    }
 
-    setSpeed(speed) {
-        this._speed = speed;
-    }
     getTop() {
         return this._top - this._radius;
     }
     getLeft() {
         return this._left - this._radius;
     }
-    getWidth() {
-        return this._width;
-    }
-    getHeight() {
-        return this._height;
-    }
 
-    bounceHorizontal() {
-        this._xVector *= -1;
-    }
-    bounceVertical() {
-        this._yVector *= -1;
-    }
-
-    move(xDistance, yDistance) {
-        this._left += xDistance * this._xVector * this._speed;
-        this._top += yDistance * this._yVector * this._speed;
-    }
-
-    draw(ctx) {
-        ctx.beginPath();
-        ctx.fillStyle = this._color;
-        ctx.arc(this._left, this._top, this._radius, 0, 2 * Math.PI, false);
-        ctx.fill();
+    _draw() {
+        this._ctx.beginPath();
+        this._ctx.fillStyle = this._color;
+        this._ctx.arc(this._left, this._top, this._radius, 0, 2 * Math.PI, false);
+        this._ctx.fill();
     }
 
 }
