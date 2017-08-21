@@ -15,7 +15,9 @@ export class MovingShapes {
         this._animationSpeed = 1 / 16;
         this._frameDistance = 0;
         this._playing = false;
+        this._frameDistanceLimit=5;
     }
+
     getHeight() {
         return this._height;
     }
@@ -34,10 +36,17 @@ export class MovingShapes {
 
     _updateFrameDistance() {
         var newTime = Date.now();
-        this._frameDistance = (newTime - this._time) * this._animationSpeed;
+        this._calcFrameDistance(newTime);
+        this._limitFrameDistance();
         this._time = newTime;
     }
 
+    _calcFrameDistance(newTime) {
+        this._frameDistance = (newTime - this._time) * this._animationSpeed;
+    }
+    _limitFrameDistance() {
+        this._frameDistance = this._frameDistance > this._frameDistanceLimit ? this._frameDistanceLimit : this._frameDistance;
+    }
     _mainLoop() {
 
         this._updateFrameDistance();
@@ -62,7 +71,7 @@ export class MovingShapes {
     _limitItemPositionInsideCanvas(item) {
         if (this._isItemBeyondLeftBorder(item)) {
             this._fixItemHorizontalPosition(item, 0);
-        }else if (this._isItemBeyondRightBorder(item)) {
+        } else if (this._isItemBeyondRightBorder(item)) {
             this._fixItemHorizontalPosition(item, this._width - item.getWidth());
         }
 
